@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".app.App"
@@ -44,6 +45,11 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
+        <activity android:name=".app.settings.SettingsBatteryOptimisationActivity"
+            android:theme="@style/AppTheme.Settings"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
         <activity android:name=".app.settings.ModuleActivity"
             android:theme="@style/AppTheme.Settings"
             android:screenOrientation="portrait"
@@ -57,6 +63,10 @@
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/app_shortcuts"/>
+
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
+            </intent-filter>
 
         </activity>
 
@@ -91,6 +101,17 @@
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
             android:theme="@style/AppTheme.ThirdPartyLicences" />
+
+        <service
+            android:name=".AodModQSTile"
+            android:icon="@drawable/ic_qs_aod_on"
+            android:label="@string/qs_aodmod_title"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
 
 
     </application>
